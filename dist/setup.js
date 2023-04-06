@@ -18,6 +18,7 @@ export default async (options) => {
     if (cacheEnabled) {
         const cacheRestored = await restoreCache([path], cacheKey);
         if (cacheRestored) {
+            await symlink(path, join(dir, "bunx")); // cache doesn't support symlinks :(
             version = await verifyBun(path);
             if (version) {
                 cacheHit = true;
