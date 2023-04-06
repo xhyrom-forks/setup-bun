@@ -1,6 +1,6 @@
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { readdir } from "node:fs/promises";
+import { readdir, symlink } from "node:fs/promises";
 import * as action from "@actions/core";
 import { downloadTool, extractZip } from "@actions/tool-cache";
 import * as cache from "@actions/cache";
@@ -42,7 +42,7 @@ export default async (options?: {
     const extractedPath = await extractZip(zipPath);
     const exePath = await extractBun(extractedPath);
     await mv(exePath, path);
-    console.log("Downloaded Bun to", path);
+    await symlink(path, join(dir, "bunx"));
     version = await verifyBun(path);
   }
   if (!version) {
