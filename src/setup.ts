@@ -42,6 +42,7 @@ export default async (options?: {
     const extractedPath = await extractZip(zipPath);
     const exePath = await extractBun(extractedPath);
     await mv(exePath, path);
+    console.log("Downloaded Bun to", path);
     version = await verifyBun(path);
   }
   if (!version) {

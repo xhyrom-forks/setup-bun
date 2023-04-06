@@ -34,3 +34,7 @@ jobs:
         name: Verify Bun
         run: |
           bun --version
+      - id: verify-bunx
+        name: Verify Bunx
+        run: |
+          bunx
